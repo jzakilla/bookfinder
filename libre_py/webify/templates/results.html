@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search Results</title>
+</head>
+<body>
+{% block content %}
+<h1>{% block title %} Results From the Bookshelf {% endblock %}</h1>
+<ul>
+	<p>Found the following results:</p>
+ {% for book in books %}
+	<li>Title: {{ book['title'] }}</li>
+	<li>Author: {{ book['author'] }}</li>
+	<li>ISBN: {{ book['isbn'] }}</li>
+	<li>Page Count: {{ book['page_count'] }}</li>
+	<li>Book Format: {{ book['book_format'] }}</li>
+	<li>Genre: {{ book['genre'] }}</li>
+	<li>Summary: {{ book['summary'] }}</li>
+	<hr>
+{% endfor %}
+</ul>
+{% endblock %}
+<a href="{{ url_for('index') }}">Return Home</a>
+</body>
+</html>

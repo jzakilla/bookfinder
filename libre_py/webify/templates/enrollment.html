@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+	<title>Libre Biblioteca Enrollment</title>
+</head>
+<body>
+
+	<p>Unfortunately the title / ISBN that you are searching for does not appear in our database! Please help us out by filling in the information about the book below:</p>
+	<hr>
+	<form method="POST">
+		<label>ISBN: </label>
+		<input type="text" for="isbn" name="isbn" value="{{ request.form['isbn'] }}" />
+		<label>Author: </label>
+		<input type="text" for="author" name="author" value="{{ request.form['author'] }}" />
+		<label>Title: </label>
+		<input type="text" for="title" name="title" value="{{ request.form['title'] }}" />
+		<br>
+		<label>Page Count:</label>
+		<input type="text" for="page_count" name="page_count" value="{{ request.form['page_count'] }}" />
+		<label>Format:</label>
+		<input type="text" for="book_format" name="book_format" value="{{ request.form['book_format'] }}" />
+		<label>Genre:</label>
+		<input type="text" for="genre" name="genre" value="{{ request.form['genre'] }}" />
+		<br>
+		<label>Summary:</label>
+		<input type="textarea" rows="5" cols="20" for="summary" name="summary" value="{{ request.form['summary'] }}" />
+		<hr>
+		<button type="submit">Enroll Book</button>
+	</form>
+
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			<ul>
+			{% for message in messages %}
+				<li>{{ message }}</li>
+			{% endfor %}
+			</ul>
+		{% endif %}
+	{% endwith %}
+	<a href="{{ url_for('index') }}">Return Home</a>
+
+</body>
+
+</html>

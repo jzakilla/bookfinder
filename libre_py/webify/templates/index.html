@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+	<title>Libre Biblioteca Query</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='librestyle.css') }}">
+</head>
+<body>
+	<p>Welcome to the book search tool for SI. Many of your colleagues have graciously donated over <span>{{ book_count }} </span>books to their work locations for other people to use. Looking for a good murder mystery? How about something to help you brush up on your C++ coding? Wondering if someone else has donated a book you want? Wonder no more, simply use the tool below to search and (hopefully) find what you need.</p>
+	<hr>
+
+	<form method="post" action="{{ url_for('results') }}">
+		<label for="user_choice">I would like to search by: </label>
+		<select id="user_choice" name="user_choice">
+			<option value="isbn">ISBN</option>
+			<option value="author">Author</option>
+			<option value="title">Title</option>
+		</select>
+		<input type="text" name="user_input" value="{{ request.form['user_input'] }}" />
+		<hr>
+		<button type="submit">Submit Query</button>
+	</form>
+	
+
+</body>
+
+</html>
