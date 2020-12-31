@@ -7,7 +7,7 @@ The user interface is written in HTML and CSS, and is rendered using Python 3.x 
 ## Included Files
 Under the libre_py directory you'll find libre.py and a directory called webify.
 libre.py is a command line only, OOP version of the software.
-webify includes all the files and directories needed to use the software.
+webify includes all the files and directories needed to use the software as a standalone product that is web based.
 Please note that at this time there is still a lot of work to be done on this project, and I'm already working 60+ hours a week at my normal job.
 
 

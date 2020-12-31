@@ -2,9 +2,6 @@ from flask import Flask, render_template, request, url_for, flash, redirect
 import sqlite3
 from werkzeug.exceptions import abort
 
-# Created Dec 2020 to help me learn the flask framework and organize the books here.
-# Written by MSG Joel Aguilar, US Army, TWI embed 2020 - 2021
-
 
 # db functions go here
 # build and return connector
@@ -32,8 +29,8 @@ def get_books(qtype, qstring):
 
 # intialize flask app
 app = Flask(__name__)
-# I mean, why not?
-app.config['SECRET_KEY'] = 'goarmybeatnavy'
+# Secret key is necessary to render pages properly between page navigation
+app.config['SECRET_KEY'] = 'helpthechildrenreadmore'
 
 
 @app.route('/')
@@ -77,7 +74,6 @@ def enrollment():
 # need lookup method definition here, to be called by query
 @app.route('/results', methods=['GET', 'POST'])
 def results():
-	# conn = get_db_connection()
 	user_choice = request.form.get('user_choice')
 	user_input = request.form.get('user_input')
 
