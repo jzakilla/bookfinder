@@ -42,11 +42,7 @@ def index():
 	return render_template('index.html', book_count=book_count)
 
 
-# success page
-
-
-# enrollment. At end of enrollment, check if ISBN exists in database.
-# if it does not, allow the book to be enrolled, othwise return page for that book.
+# Enrollment page for books that aren't found
 @app.route('/enrollment', methods=('GET', 'POST',))
 def enrollment():
 	if request.method == 'POST':
@@ -62,13 +58,30 @@ def enrollment():
 			flash('ISBN is required!')
 		else:
 			conn = get_db_connection()
-			conn.execute('INSERT INTO bookshelf (isbn, author, title, page_count, book_format, genre, summary) VALUES (?, ?, ?, ?, ?, ?, ?)',
-		 (isbn, author, title, page_count, book_format, genre, summary))
+			conn.execute('INSERT INTO bookshelf (isbn, author, title, page_count, book_format, genre, summary, stock) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+		 (isbn, author, title, page_count, book_format, genre, summary, 1))
 			conn.commit()
 			conn.close()
 			flash('{} successfully enrolled'.format(title))
 
 	return render_template('enrollment.html')
+
+
+@app.route('/stocking', methods=['GET', 'POST'])
+def stocking():
+	if request.method == 'POST':
+		ISBN = request.form['barcode_input'].replace("-", "")
+		conn = get_db_connection()
+		count = conn.execute('SELECT * FROM bookshelf WHERE isbn = ?', (ISBN,))
+		if (len(list(count))) == 0:
+			return redirect(url_for('enrollment'))
+		else:
+			conn.execute('UPDATE bookshelf SET stock = stock + 1 WHERE isbn = ?', (ISBN,))
+			conn.commit()
+			print("Book quantity updated")
+		conn.close()
+
+	return render_template('stocking.html')
 
 
 # need lookup method definition here, to be called by query
