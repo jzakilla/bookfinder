@@ -12,7 +12,7 @@ Please note that at this time there is still a lot of work to be done on this pr
 
 
 ## Stretch Goals / Todo List
-~~* Add DB auto incrementation~~
+* ~~Add DB auto incrementation~~
 * Code functionality with radio button for stocking / sales to stocking page
 * Add sanity check on enrollment page (callable method shared by stock page?)
 * Add Jira issue tracking
