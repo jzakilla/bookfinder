@@ -23,6 +23,7 @@ Please note that at this time there is still a lot of work to be done on this pr
 * Add seperate table with users
 * Client side javascript hashing function to send only password hashes
 * Signup page
+* Change index to choose user or owner
 
 ## Legal
 This software is covered under the GNU GPL v3 License which is included in the root of this directory. This software is free to use as is with no warranty or guarauntee as to it's applicibility, business worthiness, or results. By using this software you assume all risks and liabilities. 

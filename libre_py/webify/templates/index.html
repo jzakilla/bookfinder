@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='librestyle.css') }}">
 </head>
 <body>
+	<div class="mainbody">
 	<p>Welcome to the used book search tool. This location currently stocks over <span>{{ book_count }} </span>books for purchase. Looking for a good murder mystery? How about something to help you brush up on your C++ coding? Wondering if we have a book you want? Wonder no more, simply use the tool below to search and (hopefully) find what you need.</p>
 	<hr>
 
@@ -21,7 +22,7 @@
 	</form>
 	<a href="{{ url_for('stocking') }}">Stock Books</a>
 	
-
+</div>
 </body>
 
 </html>
