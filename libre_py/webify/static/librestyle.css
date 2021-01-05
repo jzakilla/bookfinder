@@ -16,6 +16,8 @@ body {
 	height: auto;
 	float: left;
 	text-align: center;
+	background-color: #66ff99;
+	border: 1px;
 }
 
 #owner {
@@ -23,4 +25,6 @@ body {
 	height: auto;
 	float: left;
 	text-align: center;
+	background-color: #6666ff;
+	border: 1px;
 }
