@@ -14,9 +14,11 @@ body {
 #enduser {
 	width: 50%;
 	float: left;
+	text-align: center;
 }
 
 #owner {
 	width: 50%;
 	float: left;
+	text-align: center;
 }
