@@ -33,13 +33,18 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'helpthechildrenreadmore'
 
 
-@app.route('/')
+@app.route('/browse')
 def index():
 	conn = get_db_connection()
 	books = conn.execute('SELECT * FROM bookshelf').fetchall()
 	book_count = len(list(books))
 	conn.close()
-	return render_template('index.html', book_count=book_count)
+	return render_template('browse.html', book_count=book_count)
+
+
+@app.route('/')
+def index():
+	return render_template('index.html')
 
 
 # Enrollment page for books that aren't found
