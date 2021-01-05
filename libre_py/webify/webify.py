@@ -34,7 +34,7 @@ app.config['SECRET_KEY'] = 'helpthechildrenreadmore'
 
 
 @app.route('/browse')
-def index():
+def browse():
 	conn = get_db_connection()
 	books = conn.execute('SELECT * FROM bookshelf').fetchall()
 	book_count = len(list(books))
