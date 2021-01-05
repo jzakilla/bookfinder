@@ -13,12 +13,14 @@ body {
 
 #enduser {
 	width: 50%;
+	height: auto;
 	float: left;
 	text-align: center;
 }
 
 #owner {
 	width: 50%;
+	height: auto;
 	float: left;
 	text-align: center;
 }
