@@ -25,5 +25,24 @@ Please note that at this time there is still a lot of work to be done on this pr
 * Signup page
 * Change index to choose user or owner
 
-## Legal
-This software is covered under the GNU GPL v3 License which is included in the root of this directory. This software is free to use as is with no warranty or guarauntee as to it's applicibility, business worthiness, or results. By using this software you assume all risks and liabilities. 
+## Usage and Installation
+1.  This software can be used several different ways. The simplest is to navigate to someurl.com and sign up for a free account.
+2. To use this software locally without an online account choose the method below that works best for you:
+	1. Standalone using Python 3.x
+		1. Install the latest version of Python 3.x for your Operating System.
+		2. Install sqlite3 for your Operating System.
+		3. Open Powershell or a terminal emulator. *As admin on windows*
+		4. Install pip
+			1. Change to your home directory and execute the following:
+				1. `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py`
+				2. `python get-pip.py`
+		5. Run: `python -m pip install flask`
+		6. Clone the repository for bookfinder: `git clone https://github.com/jzakilla/bookfinder.git`
+		7. Set your flask app environmental variable:
+			1. Windows Powershell: `$env:FLASK_APP = "\path\to\webify"`
+			2. Unix/Linux/Mac: `export FLASK_APP=\path\to\webify`
+		8. Start the website:
+			1. For use on the local computer only: `flask run`
+			2. For use on the local network: `flask run --host=0.0.0.0`
+	2. Using Docker.
+		1. Once created instructions for downloading and running docker image.
