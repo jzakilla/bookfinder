@@ -2,7 +2,7 @@
 	max-width: 80%;
 	height: 100%;
 	background-color: rgba(0, 153, 51, .6);
-	background-size: cover;
+	height: 100vh;
 	margin: 0 auto;
 	padding: 10px;
 }
