@@ -83,7 +83,7 @@ def stocking():
 		# does it exist in the database?
 		if (len(list(count))) == 0:
 			return redirect(url_for('enrollment'))
-
+		print("made it to 86")
 		# increment if it exists and increment is called for
 		if ((len(list(count))) > 0) and (decision == "stock"):
 			conn.execute('UPDATE bookshelf SET stock = stock + 1 WHERE isbn = ?', (ISBN,))
