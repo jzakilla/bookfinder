@@ -20,6 +20,7 @@ body {
 	text-align: center;
 	background-color: #66ff99;
 	border: 1px;
+	text-decoration: none;
 }
 
 #owner {
@@ -29,4 +30,5 @@ body {
 	text-align: center;
 	background-color: #6666ff;
 	border: 1px;
+	text-decoration: none;
 }

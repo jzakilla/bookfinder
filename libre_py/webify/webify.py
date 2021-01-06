@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, url_for, flash, redirect
 import sqlite3
 from werkzeug.exceptions import abort
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 # db functions go here
@@ -22,9 +23,9 @@ def get_books(qtype, qstring):
 	elif qtype == 'title':
 		books = conn.execute('SELECT * FROM bookshelf WHERE title LIKE ?', ('%'+qstring+'%',)).fetchall()
 
-
-	return books
 	conn.close()
+	return books
+	
 
 def book_check(ISBN):
 	conn = get_db_connection()
@@ -57,9 +58,23 @@ def browse():
 	return render_template('browse.html', book_count=book_count)
 
 
-@app.route('/owner')
-def owner():
-	return render_template('owner.html')
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+	if request.method == 'POST':
+		passw = request.form['password']
+		user = request.form['username']
+		# find username in database
+		conn = get_db_connection()
+		user_entry = conn.execute('SELECT * FROM users WHERE username = ?', (user,))
+		user_dict = dict(user_entry.fetchone())
+
+		# hash password
+		hashed = generate_password_hash(password, method='sha256', salt_length=8)
+		print(hashed)
+		# check hashed password against supplied password
+
+		# direct user / flash message
+	return render_template('login.html')
 
 
 # Enrollment page for books that aren't found
