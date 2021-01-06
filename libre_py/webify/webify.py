@@ -26,16 +26,16 @@ def get_books(qtype, qstring):
 	return books
 	conn.close()
 
-# def book_check(isbn):
-# 	conn = get_db_connection()
-# 	count = conn.execute('SELECT * FROM bookshelf WHERE isbn = ?', (ISBN,))
-# 	result_dict = dict(count.fetchone())
-# 	if len(result_dict) > 0:
-# 		result = 'True'
-# 	else:
-# 		result = 'False'
-# 	conn.close()
-# 	return result
+def book_check(ISBN):
+	conn = get_db_connection()
+	count = conn.execute('SELECT * FROM bookshelf WHERE isbn = ?', (ISBN,))
+	result_dict = dict(count.fetchone())
+	if len(result_dict) > 0:
+		result = 'True'
+	else:
+		result = 'False'
+	conn.close()
+	return result
 
 # intialize flask app
 app = Flask(__name__)
@@ -71,8 +71,8 @@ def enrollment():
 
 		if not isbn:
 			flash('ISBN is required!')
-		# elif book_check(isbn) == 'True':
-		# 	flash('ISBN already exists in database')
+		elif book_check(isbn) == 'True':
+			flash('ISBN already exists in database')
 		else:
 			conn = get_db_connection()
 			conn.execute('INSERT INTO bookshelf (isbn, author, title, page_count, book_format, genre, summary, stock) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
