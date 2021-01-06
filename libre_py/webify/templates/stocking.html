@@ -10,14 +10,19 @@
 	<hr>
 
 	<form method="POST">
-		<label for="stock">Stock</label>
+		<label for="inv_management">I would like to: </label>
+		<select id="inv_management" name="inv_management">
+			<option value="stock">Stock</option>
+			<option value="sell">Sell</option>
+		</select>
+		<!-- <label for="stock">Stock</label>
 		<input type="radio" id="stock" name="decision" for="decision" value="stock">
 		<label for="sell">Sell</label>
-		<input type="radio" id="sell" name="decision" for="decision" value="sell">
+		<input type="radio" id="sell" name="decision" for="decision" value="sell"> -->
 		<label>ISBN / Barcode: </label>
 		<input type="text" for="barcode_input" name="barcode_input" value="{{ request.form['barcode_input'] }}" />
 		<hr>
-		<button type="submit">Add Book</button>
+		<button type="submit">Add / Remove Book</button>
 	</form>
 	<hr>
 	<a href="{{ url_for('index') }}">Return Home</a>

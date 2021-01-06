@@ -81,7 +81,7 @@ def stocking():
 		results = dict(count.fetchone())
 		print(results)
 		# increment or decrement?
-		decision = request.form.get('decision')
+		decision = request.form.get('inv_management')
 		# does it exist in the database?
 		if len(results) == 0:
 			return redirect(url_for('enrollment'))
