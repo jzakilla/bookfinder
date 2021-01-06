@@ -80,7 +80,7 @@ def stocking():
 		count = conn.execute('SELECT * FROM bookshelf WHERE isbn = ?', (ISBN,))
 		results = len(list(count))
 		# increment or decrement?
-		decision = request.form['decision']
+		decision = request.form.get('decision')
 		# does it exist in the database?
 		if results == 0:
 			return redirect(url_for('enrollment'))
