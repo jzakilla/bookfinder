@@ -11,9 +11,9 @@
 
 	<form method="POST">
 		<label for="stock">Stock</label>
-		<input type="radio" id="stock" name="decision" for="decision" value="{{ request.form['stock'] }}" checked>
+		<input type="radio" id="stock" name="decision" for="decision" value="stock" checked>
 		<label for="sell">Sell</label>
-		<input type="radio" id="sell" name="decision" for="decision" value="{{ request.form['sell'] }}">
+		<input type="radio" id="sell" name="decision" for="decision" value="sell">
 		<label>ISBN / Barcode: </label>
 		<input type="text" for="barcode_input" name="barcode_input" value="{{ request.form['barcode_input'] }}" />
 		<hr>
