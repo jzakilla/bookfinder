@@ -20,9 +20,9 @@ Please note that at this time there is still a lot of work to be done on this pr
 * Create end user browsing pages
 * Convert to MongoDB at later date
 * Add seperate table with business info
-* Add seperate table with users
-* Client side javascript hashing function to send only password hashes
-* Signup page
+* ~~Add seperate table with users~~
+* ~~Signup page~~
+* Add flash feedback for all pages
 * ~~Change index to choose user or owner~~
 * Dockerize DB / Web app
 
