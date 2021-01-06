@@ -14,9 +14,10 @@ Please note that at this time there is still a lot of work to be done on this pr
 ## Stretch Goals / Todo List
 * ~~Add DB auto incrementation~~
 * ~~Code functionality with radio button for stocking / sales to stocking page~~
-* Add sanity check on enrollment page (callable method shared by stock page?)
+* ~~Add sanity check on enrollment page (callable method shared by stock page?)~~
 * ~~Add issue tracking~~
 * Finish CSS, improve visual appearance
+* Create end user browsing pages
 * Convert to MongoDB at later date
 * Add seperate table with business info
 * Add seperate table with users
