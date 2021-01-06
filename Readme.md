@@ -13,17 +13,17 @@ Please note that at this time there is still a lot of work to be done on this pr
 
 ## Stretch Goals / Todo List
 * ~~Add DB auto incrementation~~
-* Code functionality with radio button for stocking / sales to stocking page
+* ~~Code functionality with radio button for stocking / sales to stocking page~~
 * Add sanity check on enrollment page (callable method shared by stock page?)
-* Add Jira issue tracking
-* Dockerize DB / Web app
+* ~~Add issue tracking~~
 * Finish CSS, improve visual appearance
 * Convert to MongoDB at later date
 * Add seperate table with business info
 * Add seperate table with users
 * Client side javascript hashing function to send only password hashes
 * Signup page
-* Change index to choose user or owner
+* ~~Change index to choose user or owner~~
+* Dockerize DB / Web app
 
 ## Usage and Installation
 1.  This software can be used several different ways. The simplest is to navigate to someurl.com and sign up for a free account.
