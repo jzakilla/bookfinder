@@ -91,7 +91,7 @@ def login():
 		result = [dict(row) for row in user_entry]
 		# print(result[0]['password'])
 		
-		if len(result[0]) == 0 or not result:
+                if len(result) == 0:
 			return redirect(url_for('signup'))
 		else:
 			# check password hash against hash password
