@@ -83,19 +83,19 @@ def stocking():
 		# increment or decrement?
 		decision = request.form.get('decision')
 		# does it exist in the database?
-		if results == 0:
+		if len(results) == 0:
 			return redirect(url_for('enrollment'))
 		
 		# increment if it exists and increment is called for
-		if (dict(count['stock']) > 0) and (decision == "stock"):
+		if (results['stock']) > 0) and (decision == "stock"):
 			conn.execute('UPDATE bookshelf SET stock = stock + 1 WHERE isbn = ?', (ISBN,))
 			conn.commit()
 			print("Book quantity increased by one")
-		elif (dict(count['stock']) >= 1) and (decision == "sell"):
+		elif (results['stock']) >= 1) and (decision == "sell"):
 			conn.execute('UPDATE bookshelf SET stock = stock - 1 WHERE isbn = ?', (ISBN,))
 			conn.commit()
 			print("Book quantity reduced by one")
-		elif (dict(count['stock']) == 0) and (decision == "sell"):
+		elif (results['stock']) == 0) and (decision == "sell"):
 			conn.execute('DELETE FROM bookshelf WHERE isbn = ?', (ISBN,))
 			conn.commit()
 			print("Book no longer exists")
