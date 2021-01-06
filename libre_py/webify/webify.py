@@ -87,15 +87,15 @@ def stocking():
 			return redirect(url_for('enrollment'))
 		
 		# increment if it exists and increment is called for
-		if (results['stock']) > 0) and (decision == "stock"):
+		if (results['stock'] > 0) and (decision == "stock"):
 			conn.execute('UPDATE bookshelf SET stock = stock + 1 WHERE isbn = ?', (ISBN,))
 			conn.commit()
 			print("Book quantity increased by one")
-		elif (results['stock']) >= 1) and (decision == "sell"):
+		elif (results['stock'] >= 1) and (decision == "sell"):
 			conn.execute('UPDATE bookshelf SET stock = stock - 1 WHERE isbn = ?', (ISBN,))
 			conn.commit()
 			print("Book quantity reduced by one")
-		elif (results['stock']) == 0) and (decision == "sell"):
+		elif (results['stock'] == 0) and (decision == "sell"):
 			conn.execute('DELETE FROM bookshelf WHERE isbn = ?', (ISBN,))
 			conn.commit()
 			print("Book no longer exists")
