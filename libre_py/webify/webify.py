@@ -81,14 +81,19 @@ def login():
 		# find username in database
 		conn = get_db_connection()
 		user_entry = conn.execute('SELECT * FROM users WHERE username = ?', (user,))
-		user_dict = dict(user_entry.fetchone())
-
-		# hash password
-		hashed = generate_password_hash(password, method='sha256', salt_length=8)
-		print(hashed)
-		# check hashed password against supplied password
-
-		# direct user / flash message
+		user_dict = dict(user_entry)
+		
+		if len(user_dict) == 0:
+			return redirect(url_for('signup'))
+		else:
+			# check password hash hash password
+			print(user_dict[user])
+			print(passw)
+			pwd_check = check_password_hash(user_dict[user], passw)
+			print(pwd_check)
+			# check hashed password against supplied password
+			
+			# direct user / flash message
 	return render_template('login.html')
 
 
