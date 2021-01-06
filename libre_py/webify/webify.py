@@ -26,6 +26,16 @@ def get_books(qtype, qstring):
 	return books
 	conn.close()
 
+def book_check(isbn):
+	conn = get_db_connection()
+	count = conn.execute('SELECT * FROM bookshelf WHERE isbn = ?', (ISBN,))
+	result_dict = dict(count.fetchone())
+	if len(result_dict) > 0:
+		result = 'True'
+	else:
+		result = 'False'
+	conn.close()
+	return result
 
 # intialize flask app
 app = Flask(__name__)
@@ -61,6 +71,8 @@ def enrollment():
 
 		if not isbn:
 			flash('ISBN is required!')
+		elif book_check(isbn) == 'True':
+			flash('ISBN already exists in database')
 		else:
 			conn = get_db_connection()
 			conn.execute('INSERT INTO bookshelf (isbn, author, title, page_count, book_format, genre, summary, stock) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
@@ -79,7 +91,6 @@ def stocking():
 		conn = get_db_connection()
 		count = conn.execute('SELECT * FROM bookshelf WHERE isbn = ?', (ISBN,))
 		results = dict(count.fetchone())
-		print(results)
 		# increment or decrement?
 		decision = request.form.get('inv_management')
 		# does it exist in the database?

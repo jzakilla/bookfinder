@@ -17,6 +17,7 @@ Please note that at this time there is still a lot of work to be done on this pr
 * Add sanity check on enrollment page (callable method shared by stock page?)
 * ~~Add issue tracking~~
 * Finish CSS, improve visual appearance
+* Create end user browsing pages
 * Convert to MongoDB at later date
 * Add seperate table with business info
 * Add seperate table with users
