@@ -85,7 +85,7 @@ def stocking():
 			return redirect(url_for('enrollment'))
 
 		# increment if it exists and increment is called for
-		elif (len(list(count))) > 0 and decision == "stock":
+		if ((len(list(count))) > 0) and (decision == "stock"):
 			conn.execute('UPDATE bookshelf SET stock = stock + 1 WHERE isbn = ?', (ISBN,))
 			conn.commit()
 			print("Book quantity increased by one")
