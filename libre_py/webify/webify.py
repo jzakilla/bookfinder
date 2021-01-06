@@ -78,12 +78,28 @@ def stocking():
 		ISBN = request.form['barcode_input'].replace("-", "")
 		conn = get_db_connection()
 		count = conn.execute('SELECT * FROM bookshelf WHERE isbn = ?', (ISBN,))
-		if (len(list(count))) == 0:
+		results = dict(count.fetchone())
+		print(results)
+		# increment or decrement?
+		decision = request.form.get('inv_management')
+		# does it exist in the database?
+		if len(results) == 0:
 			return redirect(url_for('enrollment'))
-		else:
+		
+		# increment if it exists and increment is called for
+		if (results['stock'] > 0) and (decision == "stock"):
 			conn.execute('UPDATE bookshelf SET stock = stock + 1 WHERE isbn = ?', (ISBN,))
 			conn.commit()
-			print("Book quantity updated")
+			print("Book quantity increased by one")
+		elif (results['stock'] >= 1) and (decision == "sell"):
+			conn.execute('UPDATE bookshelf SET stock = stock - 1 WHERE isbn = ?', (ISBN,))
+			conn.commit()
+			print("Book quantity reduced by one")
+		elif (results['stock'] == 0) and (decision == "sell"):
+			conn.execute('DELETE FROM bookshelf WHERE isbn = ?', (ISBN,))
+			conn.commit()
+			print("Book no longer exists")
+
 		conn.close()
 
 	return render_template('stocking.html')
