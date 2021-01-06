@@ -58,6 +58,21 @@ def browse():
 	return render_template('browse.html', book_count=book_count)
 
 
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+	if request.method == 'POST':
+		username = request.form['username']
+		password = request.form['password']
+
+		hashed = generate_password_hash(password, method='sha256', salt_length=8)
+		conn = get_db_connection()
+		conn.execute('INSERT INTO users (username, password) VALUES (?, ?)',
+		 (username, hashed))
+		conn.commit()
+		conn.close()
+	return render_template('signup.html')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if request.method == 'POST':
