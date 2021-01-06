@@ -78,14 +78,15 @@ def stocking():
 		ISBN = request.form['barcode_input'].replace("-", "")
 		conn = get_db_connection()
 		count = conn.execute('SELECT * FROM bookshelf WHERE isbn = ?', (ISBN,))
+		print(list(count))
 		results = len(list(count))
 		# increment or decrement?
 		decision = request.form.get('decision')
 		# does it exist in the database?
 		if results == 0:
 			return redirect(url_for('enrollment'))
+		
 		# increment if it exists and increment is called for
-		print(decision, results)
 		if (results > 0) and (decision == "stock"):
 			conn.execute('UPDATE bookshelf SET stock = stock + 1 WHERE isbn = ?', (ISBN,))
 			conn.commit()
