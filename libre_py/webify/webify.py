@@ -78,8 +78,9 @@ def stocking():
 		ISBN = request.form['barcode_input'].replace("-", "")
 		conn = get_db_connection()
 		count = conn.execute('SELECT * FROM bookshelf WHERE isbn = ?', (ISBN,))
-		print(count)
 		results = len(list(count))
+		rd = dict(count)
+		print(rd, type(rd))
 		# increment or decrement?
 		decision = request.form.get('decision')
 		# does it exist in the database?
