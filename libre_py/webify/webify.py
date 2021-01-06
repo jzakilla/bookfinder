@@ -63,11 +63,15 @@ def signup():
 	if request.method == 'POST':
 		username = request.form['username']
 		password = request.form['password']
+		email = request.form['email']
+		address = request.form['address']
+		bus_name = request.form['business_name']
+		phone = request.form['phone']
 
 		hashed = generate_password_hash(password, method='sha256', salt_length=8)
 		conn = get_db_connection()
-		conn.execute('INSERT INTO users (username, password) VALUES (?, ?)',
-		 (username, hashed))
+		conn.execute('INSERT INTO users (username, password, email, address, business_name, phone) VALUES (?, ?, ?, ?, ?, ?)',
+		 (username, hashed, email, address, bus_name, phone))
 		conn.commit()
 		conn.close()
 	return render_template('signup.html')
@@ -80,20 +84,27 @@ def login():
 		user = request.form['username']
 		# find username in database
 		conn = get_db_connection()
-		user_entry = conn.execute('SELECT * FROM users WHERE username = ?', (user,))
-		user_dict = dict(user_entry)
+		cur = conn.cursor()
+
+		user_entry = cur.execute('SELECT * FROM users WHERE username = ?', (user,))
+		# result = [dict(row) for row in cur.fetchall()]
+		result = [dict(row) for row in user_entry]
+		# print(result[0]['password'])
 		
-		if len(user_dict) == 0:
+		if len(result[0]) == 0 or not result:
 			return redirect(url_for('signup'))
 		else:
 			# check password hash against hash password
-			pwd_check = check_password_hash(user_dict[user], passw)
+			print(result[0]['password'])
+			print(passw)
+			print(generate_password_hash(passw, method='sha256', salt_length=8))
+			pwd_check = check_password_hash(result[0]['password'], passw)
 			
 			# check hashed password against supplied password
 			if pwd_check == 'True':
-				pass
+				print("Good to go")
 			else:
-				pass
+				print("Didn't pass")
 			# direct user / flash message
 	return render_template('login.html')
 

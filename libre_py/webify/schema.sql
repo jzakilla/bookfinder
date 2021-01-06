@@ -16,5 +16,9 @@ CREATE TABLE bookshelf (
 
 CREATE TABLE users (
 	username TEXT PRIMARYKEY NOT NULL,
-	password TEXT NOT NULL
+	password TEXT NOT NULL,
+	address TEXT,
+	email TEXT,
+	business_name TEXT,
+	phone TEXT
 	);
