@@ -17,6 +17,7 @@ Please note that at this time there is still a lot of work to be done on this pr
 * ~~Add sanity check on enrollment page (callable method shared by stock page?)~~
 * ~~Add issue tracking~~
 * Finish CSS, improve visual appearance
+* Create owner dashboard
 * Create end user browsing pages
 * Convert to MongoDB at later date
 * Add seperate table with business info
@@ -24,7 +25,7 @@ Please note that at this time there is still a lot of work to be done on this pr
 * ~~Signup page~~
 * Add flash feedback for all pages
 * ~~Change index to choose user or owner~~
-* fix DB creation issues
+* ~~fix DB creation issues~~
 * Dockerize DB / Web app
 
 ## Usage and Installation
