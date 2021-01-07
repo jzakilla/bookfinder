@@ -87,21 +87,17 @@ def login():
 		cur = conn.cursor()
 
 		user_entry = cur.execute('SELECT * FROM users WHERE username = ?', (user,))
-		# result = [dict(row) for row in cur.fetchall()]
 		result = [dict(row) for row in user_entry]
-		# print(result[0]['password'])
 		
 		if len(result) == 0:
 			return redirect(url_for('signup'))
 		else:
 			# check password hash against hash password
-			print(result[0]['password'])
-			print(passw)
-			print(generate_password_hash(passw, method='sha256', salt_length=8))
-			pwd_check = check_password_hash(result[0]['password'], passw)
+			tocheck = result[0]['password']
+			pwd_check = check_password_hash(tocheck, passw)
 			
 			# check hashed password against supplied password
-			if pwd_check == 'True':
+			if pwd_check == True:
 				print("Good to go")
 			else:
 				print("Didn't pass")
