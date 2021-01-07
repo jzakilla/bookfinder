@@ -11,7 +11,7 @@ webify includes all the files and directories needed to use the software as a st
 Please note that at this time there is still a lot of work to be done on this project, and I'm already working 60+ hours a week at my normal job.
 
 
-## Stretch Goals / Todo List
+## Stretch Goals and Todo List
 * ~~Add DB auto incrementation~~
 * ~~Code functionality with radio button for stocking / sales to stocking page~~
 * ~~Add sanity check on enrollment page (callable method shared by stock page?)~~
@@ -24,6 +24,7 @@ Please note that at this time there is still a lot of work to be done on this pr
 * ~~Signup page~~
 * Add flash feedback for all pages
 * ~~Change index to choose user or owner~~
+* fix DB creation issues
 * Dockerize DB / Web app
 
 ## Usage and Installation
