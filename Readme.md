@@ -19,7 +19,7 @@ Please note that at this time there is still a lot of work to be done on this pr
 * Finish CSS, improve visual appearance
 * Create owner dashboard
 * Create end user browsing pages
-* Convert to MongoDB at later date
+* Convert to MongoDB
 * Add seperate table with business info
 * ~~Add seperate table with users~~
 * ~~Signup page~~
