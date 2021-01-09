@@ -28,14 +28,16 @@ def get_books(qtype, qstring):
 	
 
 def book_check(ISBN):
-	conn = get_db_connection()
-	count = conn.execute('SELECT * FROM bookshelf WHERE isbn = ?', (ISBN,))
-	result_dict = dict(count.fetchone())
-	if len(result_dict) > 0:
-		result = 'True'
-	else:
+	db = get_db_connection()
+	bookshelf = db.bookshelf
+
+	result = bookshelf.find_one({"isbn": ISBN})
+
+	if result == None:
 		result = 'False'
-	conn.close()
+	else:
+		result = 'True'
+	
 	return result
 
 # intialize flask app
@@ -55,8 +57,8 @@ def browse():
 	bookshelf = db.bookshelf
 	for book in bookshelf.find():
 		print(book)
-	
-	return render_template('browse.html', book_count=0)
+	book_count = db.bookshelf.count()
+	return render_template('browse.html', book_count=book_count)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -123,11 +125,11 @@ def enrollment():
 		elif book_check(isbn) == 'True':
 			flash('ISBN already exists in database')
 		else:
-			conn = get_db_connection()
-			conn.execute('INSERT INTO bookshelf (isbn, author, title, page_count, book_format, genre, summary, stock) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-		 (isbn, author, title, page_count, book_format, genre, summary, 1))
-			conn.commit()
-			conn.close()
+			db = get_db_connection()
+			bookshelf = db.bookshelf
+
+			new_book = {"title": title, "author": author, "isbn": isbn, "page_count": page_count, "book_format": book_format, "genre": genre, "summary": summary, "stock": 1}
+			bookshelf.insert_one(new_book)
 			flash('{} successfully enrolled'.format(title))
 
 	return render_template('enrollment.html')
@@ -152,23 +154,27 @@ def stocking():
 		if (exists['stock'] > 0) and (decision == "stock"):
 			count = int(exists['stock']) + 1
 			print("updated count is {}".format(count))
-			bookshelf.updateOne(
+			bookshelf.update_one(
 				{'isbn': ISBN},
 				{
 					"$set": {"stock": count}
 				})
 			
 			print("Book quantity increased by one")
-		elif (results['stock'] >= 1) and (decision == "sell"):
-			conn.execute('UPDATE bookshelf SET stock = stock - 1 WHERE isbn = ?', (ISBN,))
-			conn.commit()
+		elif (exists['stock'] > 0) and (decision == "sell"):
+			count = int(exists['stock']) - 1
+			bookshelf.update_one(
+				{'isbn': ISBN},
+				{
+					"$set": {"stock": count}
+				})
+			
 			print("Book quantity reduced by one")
-		elif (results['stock'] == 0) and (decision == "sell"):
-			conn.execute('DELETE FROM bookshelf WHERE isbn = ?', (ISBN,))
-			conn.commit()
+		elif (exists['stock'] == 0) and (decision == "sell"):
+			bookshelf.delete_one({"isbn": ISBN})
+			
 			print("Book no longer exists")
 
-		conn.close()
 
 	return render_template('stocking.html')
 
