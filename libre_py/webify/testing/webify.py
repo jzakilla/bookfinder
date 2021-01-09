@@ -190,17 +190,19 @@ def results():
 
 	if user_choice == 'isbn':
 		user_input = user_input.replace("-", "")
-		books = bookshelf.find({"isbn": user_input})
+		result = bookshelf.find({"isbn": user_input})
 	elif user_choice == 'author':
-		books = bookshelf.find({"author": user_input})
+		result = bookshelf.find({"author": user_input})
 	elif user_choice == 'title':
-		books = bookshelf.find({"author": user_input})
+		result = bookshelf.find({"author": user_input})
 
-	if books == None:
+	books = []
+
+	if result == None:
 		return redirect(url_for('enrollment'))
 	else:
-		for item in books:
-			print(books)
+		for item in result:
+			books.append(item)
 		return render_template('results.html', books=books)
 
 
