@@ -11,14 +11,8 @@
 <ul>
 	<p>Found the following results:</p>
  {% for book in books %}
-	<li>Title: {{ book['title'] }}</li>
-	<li>Author: {{ book['author'] }}</li>
-	<li>ISBN: {{ book['isbn'] }}</li>
-	<li>Page Count: {{ book['page_count'] }}</li>
-	<li>Book Format: {{ book['book_format'] }}</li>
-	<li>Genre: {{ book['genre'] }}</li>
-	<li>Summary: {{ book['summary'] }}</li>
-	<hr>
+ 	<ul>
+ 		<li> Value One: {{ book['title'] }}
 {% endfor %}
 </ul>
 {% endblock %}

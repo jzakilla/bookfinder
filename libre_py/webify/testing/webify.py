@@ -184,18 +184,23 @@ def stocking():
 def results():
 	user_choice = request.form.get('user_choice')
 	user_input = request.form.get('user_input')
+	db = get_db_connection()
+	bookshelf = db.bookshelf
+
 
 	if user_choice == 'isbn':
 		user_input = user_input.replace("-", "")
-		books = get_books('isbn', user_input)
+		books = bookshelf.find({"isbn": user_input})
 	elif user_choice == 'author':
-		books = get_books('author', user_input)
+		books = bookshelf.find({"author": user_input})
 	elif user_choice == 'title':
-		books = get_books('title', user_input)
+		books = bookshelf.find({"author": user_input})
 
-	if (len(books) == 0):
+	if books == None:
 		return redirect(url_for('enrollment'))
 	else:
+		for item in books:
+			print(books)
 		return render_template('results.html', books=books)
 
 
