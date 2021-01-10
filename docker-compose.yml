@@ -1,0 +1,18 @@
+version: "3"
+services:
+  web:
+    image: python
+    container_name: webapp
+    ports:
+      - 5000:80
+    depends_on: db
+  db:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - book_db:/data/db
+volumes:
+  book_db:
+    driver: local
