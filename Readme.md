@@ -19,14 +19,14 @@ Please note that at this time there is still a lot of work to be done on this pr
 * Finish CSS, improve visual appearance
 * Create owner dashboard
 * Create end user browsing pages
-* Convert to MongoDB
-* Add seperate table with business info
+* ~~Convert to MongoDB~~
+* ~~Add seperate table with business info~~
 * ~~Add seperate table with users~~
 * ~~Signup page~~
 * Add flash feedback for all pages
 * ~~Change index to choose user or owner~~
 * ~~fix DB creation issues~~
-* Dockerize DB / Web app
+* Dockerize DB ~~and Web app~~
 
 ## Usage and Installation
 1.  This software can be used several different ways. The simplest is to navigate to someurl.com and sign up for a free account.
