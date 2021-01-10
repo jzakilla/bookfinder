@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, url_for, flash, redirect
 import pymongo
 from werkzeug.exceptions import abort
 from werkzeug.security import generate_password_hash, check_password_hash
+import string, random
 
 
 # db functions go here
@@ -25,10 +26,15 @@ def book_check(ISBN):
 	
 	return result
 
+
+pool = string.ascii_lowercase + string.ascii_uppercase + string.digits
+length = 16
+random_key = ''.join(random.choice(pool) for _ in range(length))
+
 # intialize flask app
 app = Flask(__name__)
 # Secret key is necessary to render pages properly between page navigation
-app.config['SECRET_KEY'] = 'helpthechildrenreadmore'
+app.config['SECRET_KEY'] = random_key
 
 
 @app.route('/')
