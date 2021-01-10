@@ -11,7 +11,7 @@
 	<hr>
 	<form method="POST">
 		<label>ISBN: </label>
-		<input type="text" for="isbn" name="isbn" value="{{ request.form['isbn'] }}" />
+		<input type="text" for="isbn" name="isbn" value="{{ request.form['isbn'] }}" required />
 		<label>Author: </label>
 		<input type="text" for="author" name="author" value="{{ request.form['author'] }}" />
 		<label>Title: </label>
