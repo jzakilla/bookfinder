@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+	<title>Signup</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='librestyle.css') }}">
+	<link rel="icon" href="static/book_icon.png">
+</head>
+<body>
+<div class="mainbody">
+	<p>Please enter your information below to sign up as a used book store owner. Once your account has been created you will have access to user specific features. If you do not own a used book store, please go back to the <a href="{{ url_for['index'] }}">main</a> page and select "User".</p>
+<form method="POST">
+		<label>Username: </label>
+		<input type="text" for="username" name="username" value="{{ request.form['username'] }}" />
+		<label>Password: </label>
+		<input type="text" for="password" name="password" value="{{ request.form['password'] }}" />
+		<label>E-mail: </label>
+		<input type="text" for="email" name="email" value="{{ request.form['email'] }}" />
+		<hr>
+		<label>Address: </label>
+		<input type="text" for="address" name="address" value="{{ request.form['address'] }}" />
+		<label>Business Name: </label>
+		<input type="text" for="business_name" name="business_name" value="{{ request.form['business_name'] }}" />
+		<label>Phone: </label>
+		<input type="text" for="phone" name="phone" value="{{ request.form['phone'] }}" />
+		<hr>
+		<button type="submit">Login</button>
+	</form>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+	<title>Used Books Query</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='librestyle.css') }}">
+	<link rel="icon" href="static/book_icon.png">
+</head>
+<body>
+	<div class="mainbody">
+	<p>Welcome to the used book search tool. This location currently stocks over <span>{{ book_count }} </span>books for purchase. Looking for a good murder mystery? How about something to help you brush up on your C++ coding? Wondering if we have a book you want? Wonder no more, simply use the tool below to search and (hopefully) find what you need.</p>
+	<hr>
+
+	<form method="post" action="{{ url_for('results') }}">
+		<label for="user_choice">I would like to search by: </label>
+		<select id="user_choice" name="user_choice">
+			<option value="isbn">ISBN</option>
+			<option value="author">Author</option>
+			<option value="title">Title</option>
+		</select>
+		<input type="text" name="user_input" value="{{ request.form['user_input'] }}" />
+		<hr>
+		<button type="submit">Submit Query</button>
+	</form>
+	<a href="{{ url_for('stocking') }}">Stock Books</a>
+	
+</div>
+</body>
+
+</html>
