@@ -12,21 +12,6 @@ def get_db_connection():
 	return db
 
 
-# query db for book, return results
-def get_books(qtype, qstring):
-	mydb = get_db_connection()
-	
-	if qtype == 'isbn':
-		books = conn.execute('SELECT * FROM bookshelf WHERE isbn = ?', (qstring,)).fetchall()
-	elif qtype == 'author':
-		books = conn.execute('SELECT * FROM bookshelf WHERE author LIKE ?', ('%'+qstring+'%',)).fetchall()
-	elif qtype == 'title':
-		books = conn.execute('SELECT * FROM bookshelf WHERE title LIKE ?', ('%'+qstring+'%',)).fetchall()
-
-	conn.close()
-	return books
-	
-
 def book_check(ISBN):
 	db = get_db_connection()
 	bookshelf = db.bookshelf
