@@ -1,0 +1,20 @@
+version: "3"
+services:
+  web:
+    image: jzakilla/bookfinderpy
+    command: python3 webify.py
+    container_name: webapp
+    ports:
+      - 80:5000 # expose internal container port 5000 on the host 80
+    volumes:
+      - ./source_code:/usr/src/app
+  db:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - book_db:/data/db
+volumes:
+  book_db:
+    driver: local
