@@ -26,7 +26,8 @@ Please note that at this time there is still a lot of work to be done on this pr
 * Add flash feedback for all pages
 * ~~Change index to choose user or owner~~
 * ~~fix DB creation issues~~
-* Dockerize DB ~~and Web app~~
+* ~~Dockerize DB and Web app~~
+* Create docker image for nginx with certs
 
 ## Usage and Installation
 1.  This software can be used several different ways. The simplest is to navigate to someurl.com and sign up for a free account.
