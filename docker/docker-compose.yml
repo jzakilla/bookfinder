@@ -2,10 +2,11 @@ version: "3"
 services:
   web:
     image: jzakilla/bookfinderpy
-    command: python3 webify.py
+    command: nginx -g "daemon off;"
     container_name: webapp
     ports:
-      - 80:5000 # expose internal container port 5000 on the host 80
+      - 80:80
+      - 443:443 # expose internal container ports to host
     volumes:
       - ./source_code:/usr/src/app
   db:
