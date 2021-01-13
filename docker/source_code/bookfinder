@@ -1,0 +1,19 @@
+server {
+	listen 80;
+	server_name usedbooksonline.org;
+	location / {
+		return 301 https://$host$request_uri;
+		}
+}
+
+server {
+	listen 443 ssl;
+	server_name usedbooksonline.org;
+	ssl_certificate /var/www/cert.pem;
+	ssl_certificate_key /var/www/privkey.pem;
+	location / {
+		include uwsgi_params;
+		uwsgi_pass unix:///tmp/myproject.sock;
+		}
+}
+
