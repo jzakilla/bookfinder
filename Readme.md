@@ -27,15 +27,16 @@ Please note that at this time there is still a lot of work to be done on this pr
 * ~~Change index to choose user or owner~~
 * ~~fix DB creation issues~~
 * ~~Dockerize DB and Web app~~
-* Create docker image for nginx with certs
+* ~~Create docker image for nginx with certs~~
+* Sanitize input to harden application
 
 ## Usage and Installation
-1.  This software can be used several different ways. The simplest is to navigate to someurl.com and sign up for a free account.
+1.  This software can be used several different ways. The simplest is to navigate to [usedbookfinder.org](https://usedbookfinder.org) and sign up for a free account.
 2. To use this software locally without an online account choose the method below that works best for you:
 	1. Standalone using Python 3.x
 		1. Install the latest version of Python 3.x for your Operating System.
 		2. Install sqlite3 for your Operating System.
-		3. Open Powershell or a terminal emulator. *As admin on windows*
+		3. Open Powershell or a terminal emulator. *Note: this should be done as administrator on windows*
 		4. Install pip
 			1. Change to your home directory and execute the following:
 				1. `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py`
@@ -49,4 +50,5 @@ Please note that at this time there is still a lot of work to be done on this pr
 			1. For use on the local computer only: `flask run`
 			2. For use on the local network: `flask run --host=0.0.0.0`
 	2. Using Docker.
-		1. Once created instructions for downloading and running docker image.
+		1. Install docker and docker-compose
+		2. Navigate to the bookfinder/docker directory and run `docker-compose up -d` 
