@@ -31,7 +31,7 @@ Please note that at this time there is still a lot of work to be done on this pr
 * Sanitize input to harden application
 
 ## Usage and Installation
-1.  This software can be used several different ways. The simplest is to navigate to [usedbookfinder.org](https://usedbookfinder.org) and sign up for a free account.
+1.  This software can be used several different ways. The simplest is to navigate to [usedbooksonline.org](https://usedbooksonline.org) and sign up for a free account.
 2. To use this software locally without an online account choose the method below that works best for you:
 	1. Standalone using Python 3.x
 		1. Install the latest version of Python 3.x for your Operating System.
