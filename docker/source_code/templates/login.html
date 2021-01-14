@@ -9,12 +9,21 @@
 <div class="mainbody">
 <form method="POST">
 		<label>Username: </label>
-		<input type="text" for="username" name="username" value="{{ request.form['username'] }}" />
+		<input type="text" for="username" name="username" value="{{ request.form['username'] }}" required/>
 		<label>Password: </label>
-		<input type="text" for="password" name="password" value="{{ request.form['password'] }}" />
+		<input type="text" for="password" name="password" value="{{ request.form['password'] }}" required/>
 		<hr>
 		<button type="submit">Login</button>
 	</form>
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			<ul>
+			{% for message in messages %}
+				<li>{{ message }}</li>
+			{% endfor %}
+			</ul>
+		{% endif %}
+	{% endwith %}
 </div>
 </body>
 

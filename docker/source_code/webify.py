@@ -26,15 +26,16 @@ def book_check(ISBN):
 	
 	return result
 
-
-pool = string.ascii_lowercase + string.ascii_uppercase + string.digits
-length = 16
-random_key = ''.join(random.choice(pool) for _ in range(length))
+def gen_key():
+	pool = string.ascii_lowercase + string.ascii_uppercase + string.digits
+	length = 16
+	random_key = ''.join(random.choice(pool) for _ in range(length))
+	return(random_key)
 
 # intialize flask app
 app = Flask(__name__)
 # Secret key is necessary to render pages properly between page navigation
-app.config['SECRET_KEY'] = random_key
+app.config['SECRET_KEY'] = gen_key()
 
 
 @app.route('/')
@@ -69,6 +70,7 @@ def signup():
 		new_user = {"user": user, "password": hashed, "email": email, "address": address, "bus_name":bus_name, "phone": phone}
 
 		users.insert_one(new_user)
+		flash('New user {} added to database, please return to the owner sign in page.'.format(new_user['user']))
 	return render_template('signup.html')
 
 
@@ -94,7 +96,7 @@ def login():
 			if pwd_check == True:
 			 	return redirect(url_for('stocking'))
 			else:
-			 	print("Didn't pass")
+			 	flash("Sorry, incorrect username or password.")
 			# direct user / flash message
 	return render_template('login.html')
 
@@ -144,7 +146,7 @@ def stocking():
 		# increment if it exists and increment is called for
 		if (exists['stock'] > 0) and (decision == "stock"):
 			count = int(exists['stock']) + 1
-			print("updated count is {}".format(count))
+			flash("updated count is {}".format(count))
 			bookshelf.update_one(
 				{'isbn': ISBN},
 				{
@@ -160,11 +162,11 @@ def stocking():
 					"$set": {"stock": count}
 				})
 			
-			print("Book quantity reduced by one")
+			flash("Book quantity reduced by one")
 		elif (exists['stock'] == 0) and (decision == "sell"):
 			bookshelf.delete_one({"isbn": ISBN})
 			
-			print("Book no longer exists")
+			flash("Book no longer exists in database.")
 
 
 	return render_template('stocking.html')
