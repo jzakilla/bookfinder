@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, flash, redirect
-import pymongo
+import pymongo, re
 from werkzeug.exceptions import abort
 from werkzeug.security import generate_password_hash, check_password_hash
 import string, random
@@ -12,6 +12,10 @@ def get_db_connection():
 	db = myclient.librarydb
 	return db
 
+def sanitize(input):
+	# cleaned = input.translate({ord(i): None for i in '}${'})
+	cleaned = re.sub("[$}{","",input)
+	return cleaned
 
 def book_check(ISBN):
 	db = get_db_connection()
@@ -26,15 +30,16 @@ def book_check(ISBN):
 	
 	return result
 
-
-pool = string.ascii_lowercase + string.ascii_uppercase + string.digits
-length = 16
-random_key = ''.join(random.choice(pool) for _ in range(length))
+def gen_random_key():
+	pool = string.ascii_lowercase + string.ascii_uppercase + string.digits
+	length = 16
+	random_key = ''.join(random.choice(pool) for _ in range(length))
+	return random_key
 
 # intialize flask app
 app = Flask(__name__)
 # Secret key is necessary to render pages properly between page navigation
-app.config['SECRET_KEY'] = random_key
+app.config['SECRET_KEY'] = gen_random_key()
 
 
 @app.route('/')
@@ -55,12 +60,12 @@ def browse():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
 	if request.method == 'POST':
-		user = request.form['username']
+		user = sanitize(request.form['username'])
 		password = request.form['password']
-		email = request.form['email']
-		address = request.form['address']
-		bus_name = request.form['business_name']
-		phone = request.form['phone']
+		email = sanitize(request.form['email'])
+		address = sanitize(request.form['address'])
+		bus_name = sanitize(request.form['business_name'])
+		phone = sanitize(request.form['phone'])
 
 		hashed = generate_password_hash(password, method='sha256', salt_length=8)
 		db = get_db_connection()
@@ -76,7 +81,7 @@ def signup():
 def login():
 	if request.method == 'POST':
 		passw = request.form['password']
-		user = request.form['username']
+		user = sanitize(request.form['username'])
 		# find username in database
 		db = get_db_connection()
 		users = db.users
@@ -103,13 +108,13 @@ def login():
 @app.route('/enrollment', methods=('GET', 'POST',))
 def enrollment():
 	if request.method == 'POST':
-		title = request.form['title']
-		author = request.form['author']
-		isbn = request.form['isbn'].replace("-", "")
-		page_count = request.form['page_count']
-		book_format = request.form['book_format']
-		genre = request.form['genre']
-		summary = request.form['summary']
+		title = sanitize(request.form['title'])
+		author = sanitize(request.form['author'])
+		isbn = sanitize(request.form['isbn'].replace("-", ""))
+		page_count = sanitize(request.form['page_count'])
+		book_format = sanitize(request.form['book_format'])
+		genre = sanitize(request.form['genre'])
+		summary = sanitize(request.form['summary'])
 
 		if not isbn:
 			flash('ISBN is required!')
@@ -129,7 +134,7 @@ def enrollment():
 @app.route('/stocking', methods=['GET', 'POST'])
 def stocking():
 	if request.method == 'POST':
-		ISBN = request.form['barcode_input'].replace("-", "")
+		ISBN = sanitize(request.form['barcode_input'].replace("-", ""))
 		db = get_db_connection()
 		bookshelf = db.bookshelf
 		
@@ -174,7 +179,7 @@ def stocking():
 @app.route('/results', methods=['GET', 'POST'])
 def results():
 	user_choice = request.form.get('user_choice')
-	user_input = request.form.get('user_input')
+	user_input = sanitize(request.form.get('user_input'))
 	db = get_db_connection()
 	bookshelf = db.bookshelf
 
