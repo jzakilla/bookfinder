@@ -74,6 +74,8 @@ def signup():
 		new_user = {"user": user, "password": hashed, "email": email, "address": address, "bus_name":bus_name, "phone": phone}
 
 		users.insert_one(new_user)
+		flash('User successfully added. Please return to the login page.')
+
 	return render_template('signup.html')
 
 
@@ -102,7 +104,6 @@ def login():
 			 	print("Didn't pass")
 			# direct user / flash message
 	return render_template('login.html')
-
 
 # Enrollment page for books that aren't found
 @app.route('/enrollment', methods=('GET', 'POST',))
@@ -134,7 +135,9 @@ def enrollment():
 @app.route('/stocking', methods=['GET', 'POST'])
 def stocking():
 	if request.method == 'POST':
-		ISBN = sanitize(request.form['barcode_input'].replace("-", ""))
+		ISBN = sanitize(request.form['stock_title'].replace("-", ""))
+		if ISBN == None:
+			ISBN = sanitize(request.form['sell_title'].replace("-", ""))
 		db = get_db_connection()
 		bookshelf = db.bookshelf
 		

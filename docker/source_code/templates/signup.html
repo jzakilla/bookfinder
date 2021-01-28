@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="mainbody">
-	<p>Please enter your information below to sign up as a used book store owner. Once your account has been created you will have access to user specific features. If you do not own a used book store, please go back to the <a href="{{ url_for['index'] }}">main</a> page and select "User".</p>
+	<p>Please enter your information below to sign up as a used book store owner. Once your account has been created you will have access to user specific features. If you do not own a used book store, please go back to the <a href="{{ url_for('index') }}">main</a> page and select "User".</p>
 <form method="POST">
 		<label>Username: </label>
 		<input type="text" for="username" name="username" value="{{ request.form['username'] }}" />
@@ -23,9 +23,20 @@
 		<label>Phone: </label>
 		<input type="text" for="phone" name="phone" value="{{ request.form['phone'] }}" />
 		<hr>
-		<button type="submit">Login</button>
+		<button type="submit">Enroll New User</button>
 	</form>
 </div>
+
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			<ul>
+			{% for message in messages %}
+				<li>{{ message }}</li>
+			{% endfor %}
+			</ul>
+		{% endif %}
+	{% endwith %}
+	
 </body>
 
 </html>

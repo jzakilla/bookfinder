@@ -7,20 +7,34 @@
 </head>
 <body>
 	<p>This page is intended for stocking purposes. To begin, simply scan the barcode or manually enter the ISBN of the book that you are attempting to enroll. If the book exists in the database already, the count will be increased by one. If it does not, you will be redirected to the enrollment page.</p>
-	<hr>
-
+	<div name="top_bar">
+		<ul>
+			<li>Business Name</li>
+			<li>Address</li>
+			<li>Phone Number</li>
+		</ul>
+	</div>
+	<div name="info_pane">
+	</div>
+	<hr/>
+	<div name="stock">
 	<form method="POST">
-		<label for="inv_management">I would like to: </label>
-		<select id="inv_management" name="inv_management">
-			<option value="stock">Stock</option>
-			<option value="sell">Sell</option>
-		</select>
-
 		<label>ISBN / Barcode: </label>
-		<input type="text" for="barcode_input" name="barcode_input" value="{{ request.form['barcode_input'] }}" />
-		<hr>
-		<button type="submit">Add / Remove Book</button>
+		<input type="text" for="stock_title" name="stock_title" value="{{ request.form['stock_title'] }}" />
+		<button type="submit">Stock title</button>
 	</form>
+	</div>
+	<hr/>
+	<div name="sell">
+		<form method="POST">
+		<label>ISBN / Barcode: </label>
+		<input type="text" for="sell_title" name="sell_title" value="{{ request.form['sell_title'] }}" />
+		<button type="submit">Sell title</button>
+	</form>
+	</div>
+
+
+	
 	<hr>
 	<a href="{{ url_for('index') }}">Return Home</a>
 	
