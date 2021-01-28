@@ -28,7 +28,7 @@ Please note that at this time there is still a lot of work to be done on this pr
 * ~~fix DB creation issues~~
 * ~~Dockerize DB and Web app~~
 * ~~Create docker image for nginx with certs~~
-* Sanitize input to harden application
+* ~~Sanitize input to harden application~~
 
 ## Usage and Installation
 1.  This software can be used several different ways. The simplest is to navigate to [usedbooksonline.org](https://usedbooksonline.org) and sign up for a free account.
