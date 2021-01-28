@@ -14,7 +14,7 @@ def get_db_connection():
 
 def sanitize(input):
 	# cleaned = input.translate({ord(i): None for i in '}${'})
-	cleaned = re.sub("[$}{","",input)
+	cleaned = re.sub("[$}{]","", input)
 	return cleaned
 
 def book_check(ISBN):
